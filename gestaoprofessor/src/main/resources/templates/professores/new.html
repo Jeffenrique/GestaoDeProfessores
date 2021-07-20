@@ -22,7 +22,7 @@
 					<div class="mb-3">
 						<label class="form-label">UF</label>
 						<!--<input class="form-control" type="text" name="uf">-->
-						<select class="form-select">
+						<select class="form-select" name="uf" >
 							<option th:each="uf : ${UnidadeFederacao}" th:value="${uf.sigla}" th:text="${uf.nome}">
 							</option>
 						</select>
