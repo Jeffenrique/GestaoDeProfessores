@@ -1,0 +1,37 @@
+<div class="container mt-4" th:fragment="form(professor, action)">
+	<div class="row">
+
+		<form class="was-validated" th:object="${professor}" th:action="${action}" method="POST">
+
+			<div class="mb-3">
+				<label class="form-label">Nome do Professor</label>
+				<input class="form-control is-invalid" type="text" name="nome" th:field="*{nome}" required>
+
+				<div class="mb-3">
+					<label class="form-label">Endereço</label>
+					<input class="form-control is-invalid" type="text" name="endereco" th:field="*{endereco}" required>
+				</div>
+
+				<div class="mb-3">
+					<label class="form-label">Cidade</label>
+					<input class="form-control is-invalid" type="text" name="cidade" th:field="*{cidade}" required>
+				</div>
+
+				<div class="mb-3">
+					<label class="form-label">UF</label>
+					<!--<input class="form-control" type="text" name="uf">-->
+
+					<select class="form-select" name="uf" th:field="*{uf}">
+						<option th:each="uf : ${UnidadeFederacao}" th:value="${uf.sigla}" th:text="${uf.nome}">
+						</option>
+					</select>
+
+				</div>
+
+				<button class="btn btn-success" type="submit"><i class="fas fa-check"></i> Editar</button>
+				</br>
+				</br>
+				<a href="javascript:history.back()"><i class="fas fa-arrow-circle-left"></i> Voltar</a>
+		</form>
+	</div>
+</div>

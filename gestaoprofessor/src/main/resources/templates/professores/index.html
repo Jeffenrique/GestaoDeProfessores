@@ -1,0 +1,93 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragmentos :: head('Lista de Professores')}"></head>
+
+
+<body>
+
+	<header th:replace="~{fragmentos :: header('Lista de Professores')}"></i></header>
+
+	</br>
+	
+	<div class="container mt-4">
+		<div class="row">
+			<div class="col-12">
+
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th scope="col">Matricula</th>
+							<th scope="col">Nome do Professor</th>
+							<th scope="col">Endereço</th>
+							<th scope="col">Cidade</th>
+							<th scope="col">UF</th>
+							<th scope="col"></th>
+							<th scope="col">Editar</th>
+							<th scope="col">Excluir</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="professor : ${ListaProfessores}">
+							<th class="col-0" scope="row" th:text="${professor.cod_matricula}">ID</td>
+							<td class="col-3" th:text="${professor.nome}">Nome do Professor</td>
+							<td class="col-2" th:text="${professor.endereco}">Endereço</td>
+							<td class="col-2" th:text="${professor.cidade}">Cidade</td>
+							<td class="col-2" th:text="${professor.uf}">UF</td>
+
+							<td class="col-1"><a
+									th:href="@{/professores/{professorId}(professorId = ${professor.cod_matricula})}">Detalhes</a>
+							</td>
+							<td class="col-0"><a
+									th:href="@{/professores/{professorId}/edit(professorId = ${professor.cod_matricula})}"><i class="fas fa-user-edit"></i></a>
+							</td>
+							<td class="col-1"><a role="button" data-bs-toggle="modal" th:data-bs-target="${'#deleteProfessor' + professor.cod_matricula}"><i class="fas fa-trash-alt"></i></a>
+							
+                               <form th:action="@{/professores/{professorId}/delete(professorId = ${professor.cod_matricula})}" method="POST">
+								 <!-- Modal Deletar -->
+								<div class="modal fade" th:id="${'deleteProfessor' + professor.cod_matricula}" tabindex="-1"
+									aria-labelledby="exdeleteProfessor" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exdeleteProfessor">Deletar
+													Professor</h5>
+												<button type="button" class="btn-close"
+													data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+												<p>Deseja realmente deletar o professor? <span th:text="${professor.nome}"></span></p>
+												
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-bs-dismiss="modal">Fechar</button>
+												<button type="submit" class="btn btn-primary">Deletar</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- Fim Modal Deletar -->
+								</form> </td>
+
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+		</br>
+
+		<div class="row">
+			<a href="/professores/new"><button class="btn btn-dark"><i class="fas fa-user-plus"></i> Novo Professor</button></a>
+		</div>
+
+
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+			crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>
